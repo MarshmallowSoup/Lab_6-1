@@ -1,7 +1,6 @@
 ﻿// Lab_6-1.cpp
 
 #include <iostream>
-#include <algorithm>
 #include <time.h>
 using namespace std;
 
@@ -32,25 +31,18 @@ void QuickSort(int* arr, int first, int last)
         QuickSort(arr, first, r);
 }
 
-
-void result(int a[], const int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        if (a[i] % 2 != 0 || i % 8 == 0)
-            a[i] = 0;
-    }
-
-}
-
-int Sum(const int *p, const int n) {
+int Sum(int *p, const int n, int &k) {
     int sum = 0;
     for (int i = 0; i < n; i++)
-        sum += p[i];
+        if (p[i] % 2 == 0 || i % 8 != 0 || i == 0){
+            sum += p[i];
+            k++;
+            p[i] = 0;
+        }
+
     return sum;
 
 }
-
 
 int main()
 {
@@ -68,14 +60,17 @@ int main()
     cout << c[0];
     for (int i = 1; i < sizeof c / sizeof(int);) cout << ' ' << c[i++];
     cout << endl;
-
-    result(c, n);
+   
+    int k = 0;
+    int sum = Sum(c,n,k);
+    cout << "Sum = " << sum << endl;
+    cout << "Number of elrments = " << k << endl;
 
     cout << c[0];
-    for (int i = 1; i < sizeof c / sizeof(int);) cout << ' ' << c[i++];
+    for (int i = 1; i < n; i++)     
+    cout << ' ' << c[i];
     cout << endl;
-    int sum = Sum(c,n);
-    cout << "Sum = " << sum << endl;
+
 
     return 0;
 

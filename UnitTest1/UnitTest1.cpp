@@ -11,9 +11,10 @@ namespace UnitTest1
 	public:	
 		TEST_METHOD(TestMethod1)
 		{
+			int d = 0;
 			const int n = 4;
 			int c[n] = {1,2,3,4};
-			int k = Sum(c, n);
+			int k = Sum(c, n, d);
 			Assert::AreEqual(10, k);
 
 		}

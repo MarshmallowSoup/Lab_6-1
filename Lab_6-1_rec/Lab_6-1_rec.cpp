@@ -14,8 +14,8 @@ void Create(int* a, const int size, const int Low, const int High, int i)
 
 void Sort(int* a, const int size, int i, int j, int& k)
 {
-    if (a[j] > a[j + 1]) 
-    { 
+    if (a[j] > a[j + 1])
+    {
         int tmp = a[j];
         a[j] = a[j + 1];
         a[j + 1] = tmp;
@@ -23,12 +23,12 @@ void Sort(int* a, const int size, int i, int j, int& k)
     }
     if (j < size - i - 1)
         Sort(a, size, i, j + 1, k);
-    if (k == 0) 
-        return; 
-    if (i < size - 1) 
+    if (k == 0)
+        return;
+    if (i < size - 1)
     {
-        k = 0; 
-        Sort(a, size, i + 1, 0, k); 
+        k = 0;
+        Sort(a, size, i + 1, 0, k);
     }
 }
 
@@ -36,7 +36,7 @@ void Sort(int* a, const int size, int i, int j, int& k)
 void result(int a[], const int size, int i) {
     if (i < size)
     {
-        if (a[i] % 2 != 0 || i % 8 == 0)
+        if (a[i] % 2 == 0 || i % 8 != 0 || i == 0)
             a[i] = 0;
         return result(a, size, i + 1);
     }
@@ -44,11 +44,23 @@ void result(int a[], const int size, int i) {
 int Sum(int* a, const int size, int i)
 {
     if (i < size)
+       if (a[i] % 2 == 0 || i % 8 != 0)
         return a[i] + Sum(a, size, i + 1);
     else
         return 0;
 }
 
+int Count(const int a[], const int n, int i)
+{
+    if (i < n)
+    {
+        if (a[i] % 2 == 0 || i % 8 != 0)
+            return 1 + Count(a, n, i + 1);
+        else
+            return Count(a, n, i + 1);
+    }
+    else return 0;
+}
 
 int main()
 {
@@ -68,13 +80,19 @@ int main()
     for (int i = 1; i < sizeof c / sizeof(int);) cout << ' ' << c[i++];
     cout << endl;
 
+    int sum = Sum(c, n, 0);
+    cout << "Sum = " << sum << endl;
+
     result(c, n, 0);
 
     cout << c[0];
     for (int i = 1; i < sizeof c / sizeof(int);) cout << ' ' << c[i++];
     cout << endl;
-    int sum = Sum(c, n, 0);
 
-    cout << "Sum = " << sum << endl;
+
+    int Num = Count(c, n, 0);
+    cout << "Number of elrments = " << Num << endl;
+
+    return 0;
+
 }
-

@@ -18,13 +18,6 @@ namespace UnitTest1
 			Assert::AreEqual(10, k);
 
 		}
-		TEST_METHOD(TestMethod2)
-		{
-			const int n = 4;
-			int c[n] = { 4,2,1,7 };
-			QuickSort(c, 0,3);
-			Assert::AreEqual(4, c[2]);
-
-		}
+		
 	};
 }
